@@ -1,3 +1,5 @@
+from gc import disable
+
 import flet as ft
 
 
@@ -25,6 +27,7 @@ class View(ft.UserControl):
         self._page.controls.append(self._title)
 
         self._ddAnno = ft.Dropdown(label="Anno", width=200, alignment=ft.alignment.top_left, on_change=self._controller.handleDDYearSelection)
+        self._controller.fillDDYears()
         self._btnCreaGrafo = ft.ElevatedButton(text="Vittorie Piloti", on_click=self._controller.handleCreaGrafo)
 
         #self._controller.fillDDYear()
@@ -33,9 +36,10 @@ class View(ft.UserControl):
         row1 = ft.Row([cont, self._btnCreaGrafo], alignment=ft.MainAxisAlignment.CENTER,
                       vertical_alignment=ft.CrossAxisAlignment.END)
 
-        self._txtIntK = ft.TextField(label="Dimensione K")
+        self._txtIntK = ft.TextField(label="Dimensione K",disabled=True)
         self._btnCerca = ft.ElevatedButton(text="Cerca Dream Team",
-                                           on_click=self._controller.handleCerca)
+                                           on_click=self._controller.handleCerca,
+                                           disabled=True)
         row2 = ft.Row([ft.Container(self._txtIntK, width=250),
             ft.Container(self._btnCerca, width=250)
         ], alignment=ft.MainAxisAlignment.CENTER)
